@@ -19,6 +19,24 @@ const data = [
     image: "vans.jpg",
     id: "959f3321-330f-401a-9976-3f34ed310548",
   },
+  {
+    name: "KNU Skool VN0009QC6BT1 Col Nero Bianco",
+    price: 15,
+    image: "vans-2.jpg",
+    id: "54d287c7-6482-481e-a4eb-eee82aab1bd4",
+  },
+  {
+    name: "Jazzin Plush Foam Comfort Sneaker",
+    price: 24.99,
+    image: "rocket.jpg",
+    id: "e7427267-d319-4061-96ae-3e65f87c3cfd",
+  },
+  {
+    name: "WARD V CANVAS VN0A4BUD, Trainers Unisex Kids",
+    price: 20,
+    image: "vans-3.jpg",
+    id: "7ed11f80-36aa-4002-a0ba-ac22a386aaf3",
+  },
 ];
 
 function App() {
@@ -29,7 +47,7 @@ function App() {
         <div className="card" key={item.id}>
           <img src={item.image} alt="image" />
           <h2 className="item">{item.name}</h2>
-          <p className="price">{item.price}</p>
+          <p className="price">£{item.price}</p>
           <button type="button">Add to cart</button>
         </div>
       ))}
