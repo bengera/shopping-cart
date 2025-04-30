@@ -42,6 +42,16 @@ const data = [
 function App() {
   const [productList, setProductList] = useState(data);
   return (
+    <>
+      <h1>Buy Sneakers Today</h1>
+      <Products productList={productList} setProductList={setProductList} />;
+      <Cart />
+    </>
+  );
+}
+
+function Products({ productList }) {
+  return (
     <div className="App">
       {productList.map((item) => (
         <div className="card" key={item.id}>
@@ -53,6 +63,10 @@ function App() {
       ))}
     </div>
   );
+}
+
+function Cart() {
+  return null;
 }
 
 export default App;
