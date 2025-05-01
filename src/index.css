@@ -52,12 +52,14 @@ input {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin: 0 auto;
-  max-width: 900px;
+  margin: 0 0 auto 0;
+  max-width: 1200px;
+  padding: 2rem;
 }
 
 h1 {
-  text-align: center;
+  text-align: left;
+  padding-left: 2rem;
 }
 
 h2 {
@@ -71,11 +73,29 @@ h2 {
   padding: 1rem;
 }
 
+.price-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.price.discount {
+  color: greenyellow;
+}
+
 img {
   width: 100%;
   height: auto;
+  border-radius: 5px;
 }
 
 button {
   cursor: pointer;
+}
+
+.cart {
+  background-color: aliceblue;
+  color: #131212;
+  padding: 1rem 1rem;
+  width: 300px;
 }

@@ -44,29 +44,47 @@ function App() {
   return (
     <>
       <h1>Buy Sneakers Today</h1>
-      <Products productList={productList} setProductList={setProductList} />;
-      <Cart />
+      <div className="App">
+        <Products productList={productList} setProductList={setProductList} />
+        <Cart />
+      </div>
     </>
   );
 }
 
 function Products({ productList }) {
   return (
-    <div className="App">
+    <>
       {productList.map((item) => (
         <div className="card" key={item.id}>
           <img src={item.image} alt="image" />
           <h2 className="item">{item.name}</h2>
-          <p className="price">£{item.price}</p>
+          <div className="price-content">
+            {item.price <= 15 ? (
+              <p className="price discount">£{item.price}</p>
+            ) : (
+              <p className="price">£{item.price}</p>
+            )}
+            {item.price <= 15 ? <small>Discounted ❗</small> : ""}
+          </div>
           <button type="button">Add to cart</button>
         </div>
       ))}
-    </div>
+    </>
   );
 }
 
 function Cart() {
-  return null;
+  return (
+    <div className="cart">
+      <h3>Cart</h3>
+      <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+      </ul>
+    </div>
+  );
 }
 
 export default App;
