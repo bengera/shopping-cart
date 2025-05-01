@@ -1,63 +1,70 @@
 import { useState } from "react";
 
-const data = [
-  {
-    name: "Skechers Men's Uno Stand on Air Sneaker",
-    price: 19.99,
-    image: "sketchers.jpg",
-    id: "0c74664f-9c77-40fe-ae8c-6b9ff69044f8",
-  },
-  {
-    name: "Unisex's Rebound V6 Sneaker",
-    price: 30,
-    image: "puma.jpg",
-    id: "f8899973-7ce4-4c4b-8b02-6054eb01391e",
-  },
-  {
-    name: "Men's Caldrone Low-top Sneaker",
-    price: 25,
-    image: "vans.jpg",
-    id: "959f3321-330f-401a-9976-3f34ed310548",
-  },
-  {
-    name: "KNU Skool VN0009QC6BT1 Col Nero Bianco",
-    price: 15,
-    image: "vans-2.jpg",
-    id: "54d287c7-6482-481e-a4eb-eee82aab1bd4",
-  },
-  {
-    name: "Jazzin Plush Foam Comfort Sneaker",
-    price: 24.99,
-    image: "rocket.jpg",
-    id: "e7427267-d319-4061-96ae-3e65f87c3cfd",
-  },
-  {
-    name: "WARD V CANVAS VN0A4BUD, Trainers Unisex Kids",
-    price: 20,
-    image: "vans-3.jpg",
-    id: "7ed11f80-36aa-4002-a0ba-ac22a386aaf3",
-  },
-];
-
 function App() {
-  const [productList, setProductList] = useState(data);
-  const [cart, setCart] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+  const [productList, setProductList] = useState([
+    {
+      name: "Skechers Men's Uno Stand on Air Sneaker",
+      price: 19.99,
+      image: "sketchers.jpg",
+      id: "0c74664f-9c77-40fe-ae8c-6b9ff69044f8",
+    },
+    {
+      name: "Unisex's Rebound V6 Sneaker",
+      price: 30,
+      image: "puma.jpg",
+      id: "f8899973-7ce4-4c4b-8b02-6054eb01391e",
+    },
+    {
+      name: "Men's Caldrone Low-top Sneaker",
+      price: 25,
+      image: "vans.jpg",
+      id: "959f3321-330f-401a-9976-3f34ed310548",
+    },
+    {
+      name: "KNU Skool VN0009QC6BT1 Col Nero Bianco",
+      price: 15,
+      image: "vans-2.jpg",
+      id: "54d287c7-6482-481e-a4eb-eee82aab1bd4",
+    },
+    {
+      name: "Jazzin Plush Foam Comfort Sneaker",
+      price: 24.99,
+      image: "rocket.jpg",
+      id: "e7427267-d319-4061-96ae-3e65f87c3cfd",
+    },
+    {
+      name: "WARD V CANVAS VN0A4BUD, Trainers Unisex Kids",
+      price: 20,
+      image: "vans-3.jpg",
+      id: "7ed11f80-36aa-4002-a0ba-ac22a386aaf3",
+    },
+  ]);
+
+  function handleAddToCart(item) {
+    console.log(`${item.name} logged`);
+    setCartItems((prevItems) => {
+      const updatedCart = [...prevItems, item];
+      return updatedCart;
+    });
+  }
+
   return (
     <>
       <h1>Buy Sneakers Today</h1>
       <div className="App">
-        <Products productList={productList} setProductList={setProductList} />
-        <Cart />
+        <Products
+          productList={productList}
+          setProductList={setProductList}
+          handleAddToCart={handleAddToCart}
+        />
+        <Cart cartItems={cartItems} />
       </div>
     </>
   );
 }
 
-function Products({ productList }) {
-  function handleAddtoCart() {
-    console.log("handle items");
-  }
-
+function Products({ productList, handleAddToCart }) {
   return (
     <>
       {productList.map((item) => (
@@ -72,7 +79,7 @@ function Products({ productList }) {
             )}
             {item.price <= 15 ? <small>Discounted ❗</small> : ""}
           </div>
-          <button onClick={handleAddtoCart} type="button">
+          <button onClick={() => handleAddToCart(item)} type="button">
             Add to cart
           </button>
         </div>
@@ -81,14 +88,14 @@ function Products({ productList }) {
   );
 }
 
-function Cart() {
+function Cart({ cartItems }) {
   return (
     <div className="cart">
       <h3>My Cart</h3>
       <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
+        {cartItems.map((item) => (
+          <li key={item.id}>{item.name}</li>
+        ))}
       </ul>
     </div>
   );
