@@ -102,7 +102,23 @@ button {
   cursor: pointer;
 }
 
+.img-bin {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  background-image: url(/bin.png);
+  background-size: cover;
+  background-color: transparent;
+  position: absolute;
+  right: 20px;
+}
+
+.img-bin:hover {
+  background-color: transparent;
+}
+
 .cart {
+  position: relative;
   background-color: aliceblue;
   color: #131212;
   padding: 2rem 2rem;

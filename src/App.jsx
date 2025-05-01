@@ -62,7 +62,7 @@ function App() {
           handleAddToCart={handleAddToCart}
           cartItems={cartItems}
         />
-        <Cart cartItems={cartItems} />
+        <Cart cartItems={cartItems} setCartItems={setCartItems} />
       </div>
     </>
   );
@@ -93,9 +93,10 @@ function Products({ productList, handleAddToCart, cartItems }) {
   );
 }
 
-function Cart({ cartItems }) {
+function Cart({ cartItems, setCartItems }) {
   return (
     <div className="cart">
+      <button onClick={() => setCartItems([])} className="img-bin"></button>
       <h3>My Cart</h3>
       <ul>
         {cartItems.map((item) => (
