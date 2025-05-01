@@ -42,9 +42,10 @@ function App() {
   ]);
 
   function handleAddToCart(item) {
-    console.log(`${item.name} logged`);
-    setCartItems((prevItems) => {
-      const updatedCart = [...prevItems, item];
+    // if (cartItems.length > 4) window.alert("Shopping cart is full"); // limit cart size
+
+    setCartItems((cartItems) => {
+      const updatedCart = [...cartItems, item];
       return updatedCart;
     });
   }
@@ -57,6 +58,7 @@ function App() {
           productList={productList}
           setProductList={setProductList}
           handleAddToCart={handleAddToCart}
+          cartItems={cartItems}
         />
         <Cart cartItems={cartItems} />
       </div>
@@ -64,7 +66,8 @@ function App() {
   );
 }
 
-function Products({ productList, handleAddToCart }) {
+function Products({ productList, handleAddToCart, cartItems }) {
+  const cartNumItems = cartItems.length;
   return (
     <>
       {productList.map((item) => (
@@ -79,6 +82,7 @@ function Products({ productList, handleAddToCart }) {
             )}
             {item.price <= 15 ? <small>Discounted ❗</small> : ""}
           </div>
+
           <button onClick={() => handleAddToCart(item)} type="button">
             Add to cart
           </button>
@@ -94,7 +98,9 @@ function Cart({ cartItems }) {
       <h3>My Cart</h3>
       <ul>
         {cartItems.map((item) => (
-          <li key={item.id}>{item.name}</li>
+          <div key={item.id} className="cart-item">
+            <li>{item.name}</li>
+          </div>
         ))}
       </ul>
     </div>
