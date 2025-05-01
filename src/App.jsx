@@ -41,6 +41,7 @@ const data = [
 
 function App() {
   const [productList, setProductList] = useState(data);
+  const [cart, setCart] = useState([]);
   return (
     <>
       <h1>Buy Sneakers Today</h1>
@@ -53,6 +54,10 @@ function App() {
 }
 
 function Products({ productList }) {
+  function handleAddtoCart() {
+    console.log("handle items");
+  }
+
   return (
     <>
       {productList.map((item) => (
@@ -67,7 +72,9 @@ function Products({ productList }) {
             )}
             {item.price <= 15 ? <small>Discounted ❗</small> : ""}
           </div>
-          <button type="button">Add to cart</button>
+          <button onClick={handleAddtoCart} type="button">
+            Add to cart
+          </button>
         </div>
       ))}
     </>
@@ -77,7 +84,7 @@ function Products({ productList }) {
 function Cart() {
   return (
     <div className="cart">
-      <h3>Cart</h3>
+      <h3>My Cart</h3>
       <ul>
         <li>Item 1</li>
         <li>Item 2</li>
