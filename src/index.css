@@ -105,6 +105,17 @@ button {
 .cart {
   background-color: aliceblue;
   color: #131212;
-  padding: 1rem 1rem;
-  width: 300px;
+  padding: 2rem 2rem;
+  width: 500px;
+  border-radius: 10px;
+}
+
+.btn-checkout {
+  background-color: rgb(19, 19, 19);
+  padding: 1rem 2rem;
+  border-radius: 5px;
+}
+
+.btn-checkout:hover {
+  background-color: rgb(46, 46, 46);
 }

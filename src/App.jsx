@@ -42,8 +42,10 @@ function App() {
   ]);
 
   function handleAddToCart(item) {
-    // if (cartItems.length > 4) window.alert("Shopping cart is full"); // limit cart size
-
+    if (cartItems.length > 4) {
+      window.alert("Shopping cart is full");
+      return;
+    }
     setCartItems((cartItems) => {
       const updatedCart = [...cartItems, item];
       return updatedCart;
@@ -67,7 +69,6 @@ function App() {
 }
 
 function Products({ productList, handleAddToCart, cartItems }) {
-  const cartNumItems = cartItems.length;
   return (
     <>
       {productList.map((item) => (
@@ -103,6 +104,11 @@ function Cart({ cartItems }) {
           </div>
         ))}
       </ul>
+      {!!cartItems.length && (
+        <button className="btn-checkout">
+          {"Proceed to checkout".toUpperCase()}
+        </button>
+      )}
     </div>
   );
 }
