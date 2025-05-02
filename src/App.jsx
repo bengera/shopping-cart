@@ -115,14 +115,18 @@ function Products({ productList, handleAddToCart }) {
 }
 
 function Cart({ cartItems, setCartItems, handleDeleteItem }) {
-  const [quantity, setQuantity] = useState(1);
-  const totalCost = cartItems.reduce((acc, item) => acc + item.price, 0);
+  const [quantities, setQuantities] = useState({});
+  const totalCost = cartItems.reduce((acc, item) => {
+    const quantity = quantities[item.id] || 1;
+    return acc + item.price * quantity;
+  }, 0);
+
   return (
     <div className="cart">
       <button onClick={() => setCartItems([])} className="img-bin"></button>
       <h3>My Cart</h3>
       <ul>
-        {cartItems.map((item, idx) => (
+        {cartItems.map((item) => (
           <div key={item.id} className="cart-item">
             <li>{item.name}</li>
             <p className="cart-price">£{item.price}</p>
@@ -134,14 +138,19 @@ function Cart({ cartItems, setCartItems, handleDeleteItem }) {
               >
                 X
               </button>
-              <button className="cart-quantity">-</button>
+              <button className="btn-cart-quantity">-</button>
               <input
                 type="text"
-                placeholder={quantity}
-                value={quantity}
-                onChange={(e) => setQuantity(e.target.value)}
+                value={quantities[item.id] || 1}
+                min="1"
+                onChange={(e) =>
+                  setQuantities({
+                    ...quantities,
+                    [item.id]: Number(e.target.value),
+                  })
+                }
               />
-              <button className="cart-quantity">+</button>
+              <button className="btn-cart-quantity">+</button>
             </div>
           </div>
         ))}
