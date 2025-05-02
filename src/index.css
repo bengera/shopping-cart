@@ -119,11 +119,14 @@ button {
 
 .cart {
   position: relative;
+  display: grid;
+  grid-template-rows: 10px auto 60px;
   background-color: aliceblue;
   color: #131212;
   padding: 2rem 2rem;
   width: 500px;
   border-radius: 10px;
+  gap: 1rem;
 }
 
 .btn-checkout {

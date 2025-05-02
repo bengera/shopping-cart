@@ -68,7 +68,7 @@ function App() {
   );
 }
 
-function Products({ productList, handleAddToCart, cartItems }) {
+function Products({ productList, handleAddToCart }) {
   return (
     <>
       {productList.map((item) => (
@@ -105,7 +105,7 @@ function Cart({ cartItems, setCartItems }) {
           </div>
         ))}
       </ul>
-      {!!cartItems.length && (
+      {!!cartItems.length && ( // makes boolean
         <button className="btn-checkout">
           {"Proceed to checkout".toUpperCase()}
         </button>
