@@ -5,7 +5,7 @@ function App() {
   const [productList, setProductList] = useState([
     {
       name: "Skechers Men's Uno Stand on Air Sneaker",
-      price: 19.99,
+      price: 40,
       image: "sketchers.jpg",
       id: "0c74664f-9c77-40fe-ae8c-6b9ff69044f8",
     },
@@ -29,7 +29,7 @@ function App() {
     },
     {
       name: "Jazzin Plush Foam Comfort Sneaker",
-      price: 24.99,
+      price: 30,
       image: "rocket.jpg",
       id: "e7427267-d319-4061-96ae-3e65f87c3cfd",
     },
@@ -94,6 +94,7 @@ function Products({ productList, handleAddToCart }) {
 }
 
 function Cart({ cartItems, setCartItems }) {
+  const totalCost = cartItems.reduce((acc, item) => acc + item.price, 0);
   return (
     <div className="cart">
       <button onClick={() => setCartItems([])} className="img-bin"></button>
@@ -102,9 +103,18 @@ function Cart({ cartItems, setCartItems }) {
         {cartItems.map((item) => (
           <div key={item.id} className="cart-item">
             <li>{item.name}</li>
+            <p className="cart-price">£{item.price}</p>
+
+            <div className="cart-quantity-container">
+              <button className="cart-btn-delete">X</button>
+              <button className="cart-quantity">-</button>
+              <input type="text" />
+              <button className="cart-quantity">+</button>
+            </div>
           </div>
         ))}
       </ul>
+      {cartItems.length > 0 ? <h3>Total: £{totalCost}</h3> : null}
       {!!cartItems.length && ( // makes boolean
         <button className="btn-checkout">
           {"Proceed to checkout".toUpperCase()}
