@@ -47,6 +47,7 @@ input {
   background-color: #d0d0d0;
   border: 1px solid grey;
   color: black;
+  text-align: center;
 }
 
 .App {

@@ -42,14 +42,31 @@ function App() {
   ]);
 
   function handleAddToCart(item) {
+    const checkDuplicate = cartItems.some(
+      (cartItem) => cartItem.id === item.id
+    );
+
+    if (checkDuplicate) {
+      window.alert("This item is already in your cart");
+      return;
+    }
+
     if (cartItems.length > 4) {
       window.alert("Shopping cart is full");
       return;
     }
+
     setCartItems((cartItems) => {
       const updatedCart = [...cartItems, item];
       return updatedCart;
     });
+  }
+
+  function handleDeleteItem(id) {
+    console.log(id);
+    setCartItems((cartItems) =>
+      cartItems.filter((cartItem) => cartItem.id !== id)
+    );
   }
 
   return (
@@ -62,7 +79,11 @@ function App() {
           handleAddToCart={handleAddToCart}
           cartItems={cartItems}
         />
-        <Cart cartItems={cartItems} setCartItems={setCartItems} />
+        <Cart
+          cartItems={cartItems}
+          setCartItems={setCartItems}
+          handleDeleteItem={handleDeleteItem}
+        />
       </div>
     </>
   );
@@ -93,29 +114,40 @@ function Products({ productList, handleAddToCart }) {
   );
 }
 
-function Cart({ cartItems, setCartItems }) {
+function Cart({ cartItems, setCartItems, handleDeleteItem }) {
+  const [quantity, setQuantity] = useState(1);
   const totalCost = cartItems.reduce((acc, item) => acc + item.price, 0);
   return (
     <div className="cart">
       <button onClick={() => setCartItems([])} className="img-bin"></button>
       <h3>My Cart</h3>
       <ul>
-        {cartItems.map((item) => (
+        {cartItems.map((item, idx) => (
           <div key={item.id} className="cart-item">
             <li>{item.name}</li>
             <p className="cart-price">£{item.price}</p>
 
             <div className="cart-quantity-container">
-              <button className="cart-btn-delete">X</button>
+              <button
+                onClick={() => handleDeleteItem(item.id)}
+                className="cart-btn-delete"
+              >
+                X
+              </button>
               <button className="cart-quantity">-</button>
-              <input type="text" />
+              <input
+                type="text"
+                placeholder={quantity}
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+              />
               <button className="cart-quantity">+</button>
             </div>
           </div>
         ))}
       </ul>
       {cartItems.length > 0 ? <h3>Total: £{totalCost}</h3> : null}
-      {!!cartItems.length && ( // makes boolean
+      {!!cartItems.length && ( // makes boolean out of falsy values
         <button className="btn-checkout">
           {"Proceed to checkout".toUpperCase()}
         </button>
