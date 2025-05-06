@@ -166,5 +166,3 @@ function Cart({ cartItems, setCartItems, handleDeleteItem }) {
 }
 
 export default App;
-
-// Men's Ward Sneaker
