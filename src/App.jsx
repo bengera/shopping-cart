@@ -121,6 +121,18 @@ function Cart({ cartItems, setCartItems, handleDeleteItem }) {
     return acc + item.price * quantity;
   }, 0);
 
+  function handleIncrease(itemId) {
+    const currentQuantity = quantities[itemId] || 1;
+    const newVal = currentQuantity + 1;
+    setQuantities({ ...quantities, [itemId]: newVal });
+  }
+
+  function handleDecrease(itemId) {
+    const currentQuantity = quantities[itemId] || 1;
+    const newVal = currentQuantity - 1;
+    setQuantities({ ...quantities, [itemId]: newVal });
+  }
+
   return (
     <div className="cart">
       <button onClick={() => setCartItems([])} className="img-bin"></button>
@@ -138,7 +150,12 @@ function Cart({ cartItems, setCartItems, handleDeleteItem }) {
               >
                 X
               </button>
-              <button className="btn-cart-quantity">-</button>
+              <button
+                className="btn-cart-quantity"
+                onClick={() => handleDecrease(item.id)}
+              >
+                -
+              </button>
               <input
                 type="text"
                 value={quantities[item.id] || 1}
@@ -150,7 +167,12 @@ function Cart({ cartItems, setCartItems, handleDeleteItem }) {
                   })
                 }
               />
-              <button className="btn-cart-quantity">+</button>
+              <button
+                className="btn-cart-quantity"
+                onClick={() => handleIncrease(item.id)}
+              >
+                +
+              </button>
             </div>
           </div>
         ))}
